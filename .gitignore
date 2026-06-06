@@ -1,0 +1,15 @@
+#ignoring file with specific keys
+.env
+
+#all log files
+*.log
+
+#python bytecode and cache
+__pycache__/
+*.py[cod]
+
+#Ignore the build directory
+/build/
+
+# Ignore the ratings.csv
+ratings.csv

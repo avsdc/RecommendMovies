@@ -1,0 +1,21 @@
+/* 1. Center the main div itself within the page or parent */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center; /* Horizontally centers the child div */
+  align-items: center;     /* Vertically centers the child div */
+  min-height: 100vh;       /* Forces parent to take full screen height */
+  background-color: #f0f2f5; 
+}
+
+.movies {
+  /* Remove display: flex, justify-content, and align-items here */
+  display: flex;
+  flex-direction: column;
+  width: 60%; /* Optional: Define how wide you want the movies div to be */
+}

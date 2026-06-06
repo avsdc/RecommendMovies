@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommender</title>
+    <style>body { font-family: sans-serif; margin: 40px; line-height: 1.6; }</style>
+    <link rel="stylesheet" href="static/css/movies.css">
+</head>
+<body>
+   <div class="movie"> 
+    <h1> Movie Recommender</h1>
+    <h2> <img src="static\images\cinema\movies-img.jpg" alt="movie"> </h2>
+    <h3>   Content-Based Filtering (Movies similar to ones you like)</h3>
+    <form action="/" method="POST">
+        <input type="hidden" name="filter_type" value="content">
+        <label>Select a Movie:</label>
+        <!-- Input field acting as the dropdown -->
+        <input list="dataset-options1" id="data-select" name="movie_title" value="{{ val1 }}" placeholder="Type to search..." autocomplete="off">
+        
+        <!-- The hidden dropdown options -->
+        <datalist id="dataset-options1">
+            {% for movie in movies %}
+               <option value="{{ movie }}"></option>
+            {% endfor %}
+        </datalist>
+            <!-- 5000 options total -->
+        
+        <button type="submit">Show Similar Movies</button>
+    </form>
+
+    <br><br>
+
+    <hr style="width: 80%; border: 0; height: 2px; background-color: #333; margin: 20px auto;">
+
+    <h3> Collaborative Filtering (Movies that other similar users like)</h3>
+    <form action="/" method="POST">
+        <input type="hidden" name="filter_type" value="collaborative">
+        <label>Select User ID:</label>
+        <!-- Input field acting as the dropdown -->
+        <input list="dataset-options2" id="data-select" name="user_id" value="{{ val2 }}" placeholder="Type to search..." autocomplete="off">
+        
+        <!-- The hidden dropdown options -->
+        <datalist id="dataset-options2">
+            {% for user in users %}
+               <option value="{{ user }}"></option>
+            {% endfor %}
+            
+            <!-- 5000 options total -->
+        </datalist>
+        <button type="submit">Show User Feed</button>
+    </form>
+    
+    <br><br>
+
+    <hr style="width: 80%; border: 0; height: 2px; background-color: #333; margin: 20px auto;">
+
+    <h2>🎥 Movie Recommendations</h2>
+    {% if filter_type=="content" %}
+       <p>Generated using <strong>{{ filter_type }} filtering</strong> for: <em>{{ val1 }}</em></p>
+    {% elif filter_type=="collaborative" %}
+       <p>Generated using <strong>{{ filter_type }} filtering</strong> for: <em>{{ val2 }}</em></p>
+    {% endif %}
+    
+    <ul>
+    {% for rec in recs %}
+        <li><strong>{{ rec }}</strong></li>
+    {% else %}
+        <li>No recommendations found. Try adding more history!</li>
+    {% endfor %}
+    </ul>
+   </div>
+</body>
+</html>
